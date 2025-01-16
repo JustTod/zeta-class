@@ -43,4 +43,19 @@ describe('FizzBuzz', () => {
       // Assert
       expect(actual).toBe('Buzz');
     });
+
+  it.each`
+    input
+    ${15}
+    ${30}
+    ${45}
+  `(
+    `should be FizzBuzz when it is multiply by 3 and 5 ($input)`,
+    ({ input }: { input: number }) => {
+      // Act
+      const actual = fizzBuzz(input);
+
+      // Assert
+      expect(actual).toBe('FizzBuzz');
+    });
 });
