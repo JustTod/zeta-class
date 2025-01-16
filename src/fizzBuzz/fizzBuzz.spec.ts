@@ -58,4 +58,18 @@ describe('FizzBuzz', () => {
       // Assert
       expect(actual).toBe('FizzBuzz');
     });
+
+  it.each`
+    input
+    ${7}
+    ${14}
+  `(
+    `should be Bang when it is multiply by 7 ($input)`,
+    ({ input }: { input: number }) => {
+      // Act
+      const actual = fizzBuzz(input);
+
+      // Assort
+      expect(actual).toBe('Bang');
+    });
 });
