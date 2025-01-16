@@ -1,5 +1,6 @@
 export default (num: number): string => {
-  if (num === 3) return 'Fizz';
+  const isMultipleOfThree = num % 3 === 0;
+  if (isMultipleOfThree) return 'Fizz';
   else if (num === 5) return 'Buzz';
   else return num.toString();
 };

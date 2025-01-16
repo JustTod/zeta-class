@@ -60,4 +60,28 @@ describe('FizzBuzz', () => {
     // assert
     expect(actual).toBe(expected);
   })
+
+  it('input 6 should get Fizz', () => {
+    // arrange
+    const input = 6;
+    const expected = 'Fizz';
+
+    // act
+    const actual = fizzBuzz(input);
+
+    // assert
+    expect(actual).toBe(expected);
+  })
+
+  it('input 9 should get Fizz', () => {
+    // arrange
+    const input = 9;
+    const expected = 'Fizz';
+
+    // act
+    const actual = fizzBuzz(input);
+
+    // assert
+    expect(actual).toBe(expected);
+  })
 });
