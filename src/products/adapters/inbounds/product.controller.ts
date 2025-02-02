@@ -1,4 +1,4 @@
-import { Body, Controller, Controller, Post } from '@nestjs/common';
+import { Body,  Controller, Post } from '@nestjs/common';
 import { CreateProductUseCase } from '../../applications/usecases/createProduct.usecase'
 import { CreateProductDto } from './createProduct.dto';
 import { CreateProductCommand } from '../../applications/usecases/createProduct.command';
@@ -9,7 +9,7 @@ export class ProductController {
 
   @Post()
   async createProduct(@Body() createProductDto: CreateProductDto) {
-    const productCreatedCommand = createProductDto;
+    const productCreatedCommand: CreateProductCommand = createProductDto;
     return this.createProductUseCase.execute(productCreatedCommand);
   }
 }
