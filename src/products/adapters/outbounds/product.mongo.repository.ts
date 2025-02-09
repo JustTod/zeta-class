@@ -13,6 +13,10 @@ export class ProductMongoRepository implements ProductRepository {
     @InjectModel(productsCollectionName)
     private readonly productModel: Model<ProductEntity>
   ) {}
+  async getAll(): Promise<IProduct[]> {
+    const products = await this.productModel.find().lean().exec();
+    return products.map(ProductMongoRepository.toDomain)
+  }
 
   async create(product: IProduct): Promise<IProduct> {
     const newProduct = new this.productModel(product);

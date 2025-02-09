@@ -9,3 +9,8 @@ content-type: application/json
 	"quantity": 10
 }
 ###
+
+##Get all products
+GET http://localhost:3000/products
+content-type: application/json
+##
