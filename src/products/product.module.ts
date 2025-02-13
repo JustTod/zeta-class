@@ -8,6 +8,7 @@ import { ProductMongoRepository } from './adapters/outbounds/product.mongo.repos
 import { GetAllProductsUseCase } from './applications/usecases/getAllProduct.usecase';
 import { GetProductByIdUseCase } from './applications/usecases/getProductById.usecase';
 import { UpdateProductByIdUseCase } from './applications/usecases/updateProductById.usecase';
+import { DeleteProductByIdUseCase } from './applications/usecases/deleteProductById.usecase';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UpdateProductByIdUseCase } from './applications/usecases/updateProductB
     GetAllProductsUseCase,
     GetProductByIdUseCase,
     UpdateProductByIdUseCase,
+    DeleteProductByIdUseCase,
     {
       provide: productRepositoryToken,
       useClass: ProductMongoRepository,

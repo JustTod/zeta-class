@@ -20,11 +20,16 @@ GET http://localhost:3000/products/679ee4eac470455b80f6872f
 content-type: application/json
 ###
 
-###Get products by id
+###Update products by id
 PUT http://localhost:3000/products/679ee4eac470455b80f6872f
 content-type: application/json
 
 {
 	"quantity": 1000
 }
+###
+
+###Delete products by id
+Delete http://localhost:3000/products/679ee4eac470455b80f6872f
+content-type: application/json
 ###
