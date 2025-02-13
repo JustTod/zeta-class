@@ -1,10 +1,14 @@
-import { Body,  Controller, Post, Get, Param } from '@nestjs/common';
+import { Body,  Controller, Post, Get, Param, Put } from '@nestjs/common';
+
 import { CreateProductUseCase } from '../../applications/usecases/createProduct.usecase'
-import { CreateProductDto } from './createProduct.dto';
 import { CreateProductCommand } from '../../applications/usecases/createProduct.command';
-import { GetAllProductsUseCase } from 'src/products/applications/usecases/getAllProduct.usecase';
-import { GetProductByIdUseCase } from 'src/products/applications/usecases/getProductById.usecase';
-import { GetProductByIdQuery } from 'src/products/applications/usecases/getProductById.query';
+import { CreateProductDto } from './createProduct.dto';
+import { UpdateProductByIdDto } from './updateProductById.dto';
+import { GetAllProductsUseCase } from '../../applications/usecases/getAllProduct.usecase';
+import { GetProductByIdUseCase } from '../../applications/usecases/getProductById.usecase';
+import { GetProductByIdQuery } from '../../applications/usecases/getProductById.query';
+import { UpdateProductByIdCommand } from '../../applications/usecases/updateProductById.command';
+import { UpdateProductByIdUseCase } from '../../applications/usecases/updateProductById.usecase';
 
 @Controller('products')
 export class ProductController {
@@ -12,8 +16,8 @@ export class ProductController {
     private readonly createProductUseCase: CreateProductUseCase,
     private readonly getAllProductsUseCase: GetAllProductsUseCase,
     private readonly getProductByIdUseCase: GetProductByIdUseCase,
+    private readonly updateProductByIdUseCase: UpdateProductByIdUseCase,
   ) {}
-
 
   @Post()
   async createProduct(@Body() createProductDto: CreateProductDto) {
@@ -31,5 +35,18 @@ export class ProductController {
       id,
     };
     return this.getProductByIdUseCase.execute(query);
+  }
+
+  @Put(':id')
+  updateById(
+    @Param('id') id: string,
+    @Body() updateProductDto: UpdateProductByIdDto
+  ) {
+    const command: UpdateProductByIdCommand = {
+      id,
+      product: updateProductDto
+    };
+
+    return this.updateProductByIdUseCase.execute(command);
   }
 }

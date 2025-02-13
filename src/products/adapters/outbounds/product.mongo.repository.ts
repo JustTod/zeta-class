@@ -13,6 +13,7 @@ export class ProductMongoRepository implements ProductRepository {
     @InjectModel(productsCollectionName)
     private readonly productModel: Model<ProductEntity>
   ) {}
+
   async getById(id: string): Promise<IProduct> {
     const product = await this.productModel.findById(id).lean().exec();
     return ProductMongoRepository.toDomain(product);
@@ -26,6 +27,21 @@ export class ProductMongoRepository implements ProductRepository {
     const newProduct = new this.productModel(product);
     const productCreated = await newProduct.save();
     return ProductMongoRepository.toDomain(productCreated)
+  }
+
+  async updateById(id: string, product: Partial<IProduct>): Promise<IProduct> {
+    const updatedProduct = await this.productModel
+      .findByIdAndUpdate(
+        id,
+        {
+          ...product,
+        },
+        { new: true }
+      )
+      .lean()
+      .exec();
+
+      return ProductMongoRepository.toDomain(updatedProduct);
   }
 
   static toDomain(product: ProductEntity): IProduct {
