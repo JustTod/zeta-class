@@ -28,5 +28,6 @@ describe('Get product by id use case', () => {
 
     // Assert
     expect(actual).toBe(expected);
+    // expect(productRepository.getById).toHaveBeenCalledWith(productId); to check that called function is correct
   })
 })
