@@ -6,12 +6,14 @@ import { mongoUri } from './config/mongo.config';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './products/product.module';
+import { UsersModule } from './users/adapters/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(mongoUri),
     ProductModule,
+    UsersModule,
     CatsModule
   ],
   controllers: [AppController],

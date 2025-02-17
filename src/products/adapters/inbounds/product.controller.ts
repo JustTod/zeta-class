@@ -11,12 +11,15 @@ import {
 import { CreateProductUseCase } from '../../applications/usecases/createProduct.usecase'
 import { CreateProductCommand } from '../../applications/usecases/createProduct.command';
 import { CreateProductDto } from './createProduct.dto';
-import { UpdateProductByIdDto } from './updateProductById.dto';
+
 import { GetAllProductsUseCase } from '../../applications/usecases/getAllProduct.usecase';
 import { GetProductByIdUseCase } from '../../applications/usecases/getProductById.usecase';
 import { GetProductByIdQuery } from '../../applications/usecases/getProductById.query';
+
+import { UpdateProductByIdDto } from './updateProductById.dto';
 import { UpdateProductByIdCommand } from '../../applications/usecases/updateProductById.command';
 import { UpdateProductByIdUseCase } from '../../applications/usecases/updateProductById.usecase';
+
 import { DeleteProductByIdCommand } from 'src/products/applications/usecases/deleteProductById.command';
 import { DeleteProductByIdUseCase } from 'src/products/applications/usecases/deleteProductById.usecase';
 
