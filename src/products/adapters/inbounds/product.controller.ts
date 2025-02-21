@@ -5,9 +5,11 @@ import {
   Get,
   Param,
   Put,
-  Delete
+  Delete,
+  UseGuards,
 } from '@nestjs/common';
 
+import { JwtAuthGuard } from '../../../auth/jwtAuth.guard';
 import { CreateProductUseCase } from '../../applications/usecases/createProduct.usecase'
 import { CreateProductCommand } from '../../applications/usecases/createProduct.command';
 import { CreateProductDto } from './createProduct.dto';
@@ -20,8 +22,8 @@ import { UpdateProductByIdDto } from './updateProductById.dto';
 import { UpdateProductByIdCommand } from '../../applications/usecases/updateProductById.command';
 import { UpdateProductByIdUseCase } from '../../applications/usecases/updateProductById.usecase';
 
-import { DeleteProductByIdCommand } from 'src/products/applications/usecases/deleteProductById.command';
-import { DeleteProductByIdUseCase } from 'src/products/applications/usecases/deleteProductById.usecase';
+import { DeleteProductByIdCommand } from '../../../products/applications/usecases/deleteProductById.command';
+import { DeleteProductByIdUseCase } from '../../../products/applications/usecases/deleteProductById.usecase';
 
 @Controller('products')
 export class ProductController {
@@ -33,16 +35,20 @@ export class ProductController {
     private readonly deleteProductByIdUseCase: DeleteProductByIdUseCase,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createProduct(@Body() createProductDto: CreateProductDto) {
     const productCreatedCommand: CreateProductCommand = createProductDto;
     return this.createProductUseCase.execute(productCreatedCommand);
   }
+
+  // @UseGuards(JwtAuthGuard)
   @Get()
   getAll() {
     return this.getAllProductsUseCase.execute();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   getById(@Param('id') id: string) {
     const query: GetProductByIdQuery = {
@@ -51,6 +57,7 @@ export class ProductController {
     return this.getProductByIdUseCase.execute(query);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   updateById(
     @Param('id') id: string,
@@ -64,6 +71,7 @@ export class ProductController {
     return this.updateProductByIdUseCase.execute(command);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   deleteById(@Param('id') id: string) {
     const command: DeleteProductByIdCommand = {
@@ -71,5 +79,10 @@ export class ProductController {
     };
 
     return this.deleteProductByIdUseCase.execute(command);
+  }
+
+  @Get()
+  hello() {
+    return 'hello world'
   }
 }

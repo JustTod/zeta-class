@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { IUser } from 'src/users/applications/domain/user.domain';
+import { IUser } from '../../applications/domain/user.domain';
 
 export interface UserEntity
   extends Omit<IUser, 'id' | 'setHashPassword' | 'comparePassword'> {
