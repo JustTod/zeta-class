@@ -23,7 +23,7 @@ export class UserMongoRepository implements UsersRepository {
 
   async getByUserName(userName: string): Promise<IUser> {
     const user = await this.userModel.findOne({ userName }).exec();
-    return UserMongoRepository.toDomain(user);
+    return user ? UserMongoRepository.toDomain(user) : undefined;
   }
 
   static toDomain(user: UserEntity): IUser {
